@@ -18,9 +18,13 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "rimraf ./build && react-scripts build",
     "test": "react-scripts test",
+    "test:dev:ci": "rimraf ./reports && react-scripts test --verbose --no-cache --coverage --watchAll --ci --updateSnapshot  --reporters=default --reporters=jest-junit --env=jest-environment-jsdom-sixteen --testResultsProcessor=jest-junit --coverageDirectory=./reports/coverage",
+    "test:ci": "rimraf ./reports && react-scripts test --verbose --no-cache --coverage --ci --updateSnapshot --reporters=default --reporters=jest-junit --env=jest-environment-jsdom-sixteen --testResultsProcessor=jest-junit --coverageDirectory=./reports/coverage",
     "eject": "react-scripts eject",
+    "predeploy": "rimraf ./storybook-static && yarn build-storybook",
+    "deploy": "gh-pages -d storybook-static",
     "storybook": "start-storybook -p 6006 -s public --no-dll",
     "build-storybook": "build-storybook -s public --no-dll"
   },
@@ -54,12 +58,21 @@
     "@storybook/node-logger": "^6.1.2",
     "@storybook/preset-create-react-app": "^3.1.5",
     "@storybook/react": "^6.1.2",
+    "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.1",
-    "react-is": "^17.0.1",
+    "eslint": "^7.14.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "jest-environment-jsdom-sixteen": "^1.0.3",
     "jest-junit": "^12.0.0",
     "jshint": "^2.12.0",
     "prettier": "^2.2.0",
+    "react-is": "^17.0.1",
     "rimraf": "^3.0.2"
   }
 }
